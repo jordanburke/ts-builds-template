@@ -1,7 +1,10 @@
-## ts-builds-template
+# ts-builds-template
 
 [![Node.js CI](https://github.com/jordanburke/ts-builds-template/actions/workflows/node.js.yml/badge.svg)](https://github.com/jordanburke/ts-builds-template/actions/workflows/node.js.yml)
 [![npm version](https://img.shields.io/npm/v/ts-builds-template.svg)](https://www.npmjs.com/package/ts-builds-template)
+[![npm downloads](https://img.shields.io/npm/dm/ts-builds-template.svg)](https://www.npmjs.com/package/ts-builds-template)
+[![GitHub stars](https://img.shields.io/github/stars/jordanburke/ts-builds-template.svg?style=flat&logo=github)](https://github.com/jordanburke/ts-builds-template/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A modern TypeScript library template with standardized build scripts and tooling.
 
@@ -12,6 +15,11 @@ A modern TypeScript library template with standardized build scripts and tooling
 - **Code Quality**: ESLint + Prettier with automatic formatting and fixing
 - **ESM Output**: ES module output with proper TypeScript declarations
 - **Standardized Scripts**: Consistent commands via ts-builds across all projects
+
+## Requirements
+
+- **Node.js 24+** (pinned in `.nvmrc`; npm 11.5.1+ also fixes OIDC trusted publishing)
+- **pnpm 11+** (pinned via the `packageManager` field — run `corepack enable` to use the exact version)
 
 ## Quick Start
 
