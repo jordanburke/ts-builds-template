@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a TypeScript library template designed to be cloned/forked for creating new npm packages. It uses the `ts-builds` toolchain for standardized build scripts with ESM output.
 
-**Template Usage**: See STANDARDIZATION_GUIDE.md for applying this pattern to other TypeScript projects.
+**Template Usage**: To apply this pattern to other TypeScript projects, see the canonical standardization guide in [ts-builds](https://github.com/jordanburke/ts-builds/blob/main/STANDARDIZATION_GUIDE.md) (or the **ts-builds** skill). This repo is the starting scaffold; ts-builds owns the standards.
 
 ## Development Commands
 
