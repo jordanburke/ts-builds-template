@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.13.5",
-    "ts-builds": "^3.4.1",
+    "ts-builds": "^3.4.2",
     "tsdown": "^0.22.14"
   },
   "type": "module",
