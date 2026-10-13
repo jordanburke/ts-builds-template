@@ -403,9 +403,7 @@ jobs:
           node-version: "18"
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10
+        uses: pnpm/action-setup@v6.1.0 # reads the version from packageManager
 
       - name: Install dependencies
         run: pnpm install
