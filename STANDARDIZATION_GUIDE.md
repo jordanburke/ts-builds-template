@@ -8,5 +8,5 @@ pattern to existing projects.
 - Guide: <https://github.com/jordanburke/ts-builds/blob/main/STANDARDIZATION_GUIDE.md>
 - Or invoke the **ts-builds** skill.
 
-This template *consumes* those standards; it does not define them. Keeping one
+This template _consumes_ those standards; it does not define them. Keeping one
 copy in ts-builds prevents the two from drifting.
