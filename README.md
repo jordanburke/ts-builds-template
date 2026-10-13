@@ -18,8 +18,8 @@ A modern TypeScript library template with standardized build scripts and tooling
 
 ## Requirements
 
-- **Node.js 24+** (pinned in `.nvmrc`; npm 11.5.1+ also fixes OIDC trusted publishing)
-- **pnpm 11+** (pinned via the `packageManager` field — run `corepack enable` to use the exact version)
+- **Node.js 24+** (exact version pinned in `.nvmrc`; npm 11.5.1+ also fixes OIDC trusted publishing)
+- **pnpm 12+** (pinned via the `packageManager` field — run `corepack enable` to use the exact version)
 
 ## Quick Start
 
