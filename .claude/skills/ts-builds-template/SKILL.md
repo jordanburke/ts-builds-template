@@ -52,7 +52,7 @@ my-library/
 ├── tsdown.config.ts       # Build config (imports from ts-builds)
 ├── tsconfig.json          # TypeScript config (extends ts-builds)
 ├── package.json           # Scripts, exports, dependencies
-├── CLAUDE.md              # Claude Code project guidance
+├── AGENTS.md              # AI coding agent guidance
 └── README.md
 ```
 
@@ -66,7 +66,7 @@ After cloning, update these files for your new library:
   ```markdown
   [![npm version](https://img.shields.io/npm/v/YOUR-PACKAGE-NAME.svg)](https://www.npmjs.com/package/YOUR-PACKAGE-NAME)
   ```
-- [ ] `CLAUDE.md` — project overview, architecture notes, custom workflows
+- [ ] `AGENTS.md` — project overview, architecture notes, custom workflows
 - [ ] `LICENSE` — update if not using MIT
 - [ ] `src/index.ts` — replace template code with your library's public API
 - [ ] `test/*.spec.ts` — replace template tests

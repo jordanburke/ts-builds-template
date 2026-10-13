@@ -8,16 +8,16 @@ Complete guide for creating a new TypeScript library using the ts-builds-templat
 
 Before starting, ensure you have:
 
-- **Node.js**: ≥ 18.0.0
-- **pnpm**: Latest version (template uses 10.18.3+)
+- **Node.js**: 24+ (the template pins an exact version in `.nvmrc`)
+- **pnpm**: 12+ (pinned via the `packageManager` field — run `corepack enable` to use the exact version)
 - **Git**: For version control
 - **npm account**: For publishing (optional)
 
 Check versions:
 
 ```bash
-node --version   # Should be 18.0.0 or higher
-pnpm --version   # Latest stable version
+node --version   # Should be 24 or higher
+pnpm --version   # Should be 12 or higher
 git --version
 ```
 
@@ -123,9 +123,9 @@ Document your main functions and types here.
 MIT
 ```
 
-### Update CLAUDE.md
+### Update AGENTS.md
 
-Customize the Claude Code guidance for your project:
+Customize the AI agent guidance for your project:
 
 1. **Update project overview** - Describe what your library does
 2. **Add architecture notes** - Explain key design decisions
@@ -135,7 +135,7 @@ Customize the Claude Code guidance for your project:
 Example:
 
 ```markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## Project Overview
 
@@ -367,7 +367,7 @@ After completing setup, verify:
 - [ ] package.json has correct name, version, description
 - [ ] package.json repository URL points to your repo
 - [ ] README.md describes your library
-- [ ] CLAUDE.md reflects your project
+- [ ] AGENTS.md reflects your project
 - [ ] LICENSE file is correct
 - [ ] `pnpm validate` passes
 - [ ] Git repository initialized and pushed
@@ -395,18 +395,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
+      # pnpm must be set up before Node.js so setup-node can use the pnpm cache
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0 # reads the version from packageManager
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Run validation
         run: pnpm validate

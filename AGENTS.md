@@ -8,6 +8,13 @@ This is a TypeScript library template designed to be cloned/forked for creating 
 
 **Template Usage**: To apply this pattern to other TypeScript projects, see the canonical standardization guide in [ts-builds](https://github.com/jordanburke/ts-builds/blob/main/STANDARDIZATION_GUIDE.md) (or the **ts-builds** skill). This repo is the starting scaffold; ts-builds owns the standards.
 
+## Toolchain Pins
+
+- **Node.js**: exact version in `.nvmrc` (both workflows read it via `node-version-file`). Pin the patch, never a bare major: setup-node resolves a bare `24` to whatever the runner caches, and the bundled npm decides whether OIDC trusted publishing works (npm 11.17.0 fails with E401; 11.19.0 publishes).
+- **pnpm 12**: exact version in the `packageManager` field. Change it with `pnpm self-update <version>`, run `pnpm install`, then commit `package.json` **and** `pnpm-lock.yaml` together. pnpm 12 records its own version in the lockfile, and CI's `pnpm install --frozen-lockfile` fails with `ERR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE` when the lockfile lacks that record.
+- **CI pnpm setup**: `pnpm/action-setup@v6.1.0`, pinned exactly. It is the first release that supports pnpm 12, and the floating `v6` tag still points at v6.0.10. Pass no `version:` input; the action reads `packageManager`.
+- **pnpm settings** live in `pnpm-workspace.yaml`; pnpm reads only auth/registry from `.npmrc`. pnpm 12 fails with `ERR_PNPM_UNRECOGNIZED_WORKSPACE_SETTINGS` on an unknown key in `pnpm-workspace.yaml` when the running pnpm satisfies the `packageManager` pin (otherwise it only warns).
+
 ## Development Commands
 
 All commands delegate to `ts-builds` for consistency across projects:
@@ -84,13 +91,19 @@ pnpm test -- test/specific.spec.ts          # Run specific file
 - `test/*.spec.ts` - Test files
 - `tsdown.config.ts` - Build config (imports from ts-builds)
 - `tsconfig.json` - TypeScript config (extends ts-builds)
+- `.nvmrc` - Exact Node.js version for local use and CI
+- `pnpm-workspace.yaml` - pnpm settings (hoisting, release-age exclusions)
+- `.github/workflows/node.js.yml` - CI: `pnpm validate` on pushes and PRs to `main`
+- `.github/workflows/publish.yml` - Publishes to npm when a `v*` tag is pushed
 - `.claude/skills/ts-builds-template/` - Claude Code skill for bootstrapping libraries from this template
 
 ## Publishing
 
+Publishing runs in CI, triggered by a version tag:
+
 ```bash
-npm version patch|minor|major
-npm publish --access public
+npm version patch|minor|major   # bumps package.json, commits, and creates the vX.Y.Z tag
+git push --follow-tags          # the tag triggers .github/workflows/publish.yml
 ```
 
-The `prepublishOnly` hook automatically runs `pnpm validate` before publishing.
+`publish.yml` runs `pnpm validate` and `npm pack --dry-run`, publishes with npm OIDC trusted publishing and provenance (no npm token), then creates a GitHub release. The `prepublishOnly` hook also runs `pnpm validate`.

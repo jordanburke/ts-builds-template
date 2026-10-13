@@ -24,7 +24,7 @@ ts-builds-template/
 The skill activates when:
 
 - Creating a new TypeScript library or npm package from this template
-- Customizing the template (package.json, README, CLAUDE.md)
+- Customizing the template (package.json, README, AGENTS.md)
 - Understanding the template's project structure
 - Publishing a library to npm for the first time
 

@@ -112,7 +112,7 @@ cp -r .claude/skills/ts-builds-template ~/.claude/skills/
 
 **References**:
 
-- [CLAUDE.md](./CLAUDE.md) - Development guidance for this project
+- [AGENTS.md](./AGENTS.md) - Development guidance for AI coding agents
 - [.claude/skills/ts-builds-template/](./.claude/skills/ts-builds-template/) - Complete skill documentation
 
 ---
