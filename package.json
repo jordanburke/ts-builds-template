@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
-    "ts-builds": "^4.0.0",
-    "tsdown": "^0.23.1"
+    "ts-builds": "^4.3.0",
+    "tsdown": "^0.23.7"
   },
   "type": "module",
   "main": "./dist/index.js",
@@ -50,5 +50,5 @@
     "dist"
   ],
   "prettier": "ts-builds/prettier",
-  "packageManager": "pnpm@12.11.2"
+  "packageManager": "pnpm@12.20.0+sha512.6ccc74997ccef4e67999788e18dbfbfa583e2a849668668db4707b6a8306662f47156e650232a985bd3ec24cf9364c1aa154d37e51ed7aac62c1cd1e3afc80c3"
 }
