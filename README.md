@@ -35,7 +35,10 @@ A modern TypeScript library template with standardized build scripts and tooling
 
 ```bash
 pnpm validate  # Main command: format, lint, test, and build everything
+pnpm run ci    # What CI runs: the same steps, checking format and lint without fixing
 ```
+
+Always type `pnpm run ci`. A bare `pnpm ci` is pnpm's own clean install, not this script.
 
 ### Individual Commands
 
@@ -63,7 +66,7 @@ pnpm typecheck     # Check TypeScript types
 
 ## Publishing
 
-The template automatically runs `pnpm validate` before publishing via the `prepublishOnly` script.
+The template automatically runs `pnpm run ci` before publishing via the `prepublishOnly` script. It checks format and lint without fixing them, so run `pnpm validate` first if it fails.
 
 ```bash
 npm version patch|minor|major

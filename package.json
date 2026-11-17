@@ -17,6 +17,7 @@
   },
   "scripts": {
     "validate": "ts-builds validate",
+    "ci": "ts-builds ci",
     "format": "ts-builds format",
     "format:check": "ts-builds format:check",
     "lint": "ts-builds lint",
@@ -27,7 +28,7 @@
     "test:coverage": "ts-builds test:coverage",
     "build": "ts-builds build",
     "dev": "ts-builds dev",
-    "prepublishOnly": "pnpm validate"
+    "prepublishOnly": "pnpm run ci"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

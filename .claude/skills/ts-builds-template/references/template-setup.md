@@ -306,9 +306,9 @@ npm publish --access public
 npm publish
 ```
 
-The `prepublishOnly` hook automatically runs `pnpm validate`, ensuring:
+The `prepublishOnly` hook automatically runs `pnpm run ci`, which checks without fixing, ensuring:
 
-- Code is formatted
+- Code is formatted (run `pnpm validate` to fix it)
 - Linting passes
 - Tests pass
 - Build succeeds
@@ -390,9 +390,15 @@ on:
   pull_request:
     branches: [main]
 
+# A newer push to a pull request cancels the build it supersedes; each push to main keeps its own run
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -410,11 +416,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run validation
-        run: pnpm validate
+      # validate's checks without the fixers; a bare `pnpm ci` is pnpm's clean install, so type "run"
+      - name: Run checks
+        run: pnpm run ci
 ```
 
-This runs your full validation on every push and pull request.
+This runs every check on every push and pull request. It fails on unformatted or unlinted code instead of quietly fixing it on the runner.
 
 ## Next Steps
 
