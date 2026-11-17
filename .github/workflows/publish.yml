@@ -8,6 +8,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
       id-token: write # OIDC for npm trusted publishing
@@ -29,8 +30,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Validate
-        run: pnpm validate
+      # Checks without fixing, so what is published is exactly what was tagged
+      - name: Check
+        run: pnpm run ci
 
       - name: Verify package contents
         run: |

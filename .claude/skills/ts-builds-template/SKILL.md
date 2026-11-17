@@ -85,6 +85,7 @@ All commands delegate to [ts-builds](https://github.com/jordanburke/ts-builds) f
 
 ```bash
 pnpm validate        # Main pre-commit command
+pnpm run ci          # What CI runs: the same checks, without fixing
 pnpm format          # Format with Prettier
 pnpm format:check    # Check formatting only
 pnpm lint            # Fix ESLint issues
@@ -112,7 +113,7 @@ npm version patch|minor|major
 npm publish
 ```
 
-The `prepublishOnly` hook runs `pnpm validate` automatically, ensuring code is formatted, linted, tested, and built before every publish.
+The `prepublishOnly` hook runs `pnpm run ci` automatically: it checks that code is formatted and linted, then tests and builds, before every publish. It never fixes files, so run `pnpm validate` first.
 
 ## ESM Output
 

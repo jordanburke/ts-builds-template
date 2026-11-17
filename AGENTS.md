@@ -21,6 +21,7 @@ All commands delegate to `ts-builds` for consistency across projects:
 
 ```bash
 pnpm validate        # Main command: format + lint + test + build (use before commits)
+pnpm run ci          # What CI runs: validate's steps, checking format and lint without fixing
 
 pnpm format          # Format code with Prettier
 pnpm format:check    # Check formatting only
@@ -93,7 +94,7 @@ pnpm test -- test/specific.spec.ts          # Run specific file
 - `tsconfig.json` - TypeScript config (extends ts-builds)
 - `.nvmrc` - Exact Node.js version for local use and CI
 - `pnpm-workspace.yaml` - pnpm settings (hoisting, release-age exclusions)
-- `.github/workflows/node.js.yml` - CI: `pnpm validate` on pushes and PRs to `main`
+- `.github/workflows/node.js.yml` - CI: `pnpm run ci` (validate's checks, without the fixers) on pushes and PRs to `main`; a newer push to a PR cancels its older build
 - `.github/workflows/publish.yml` - Publishes to npm when a `v*` tag is pushed
 - `.claude/skills/ts-builds-template/` - Claude Code skill for bootstrapping libraries from this template
 
@@ -106,4 +107,6 @@ npm version patch|minor|major   # bumps package.json, commits, and creates the v
 git push --follow-tags          # the tag triggers .github/workflows/publish.yml
 ```
 
-`publish.yml` runs `pnpm validate` and `npm pack --dry-run`, publishes with npm OIDC trusted publishing and provenance (no npm token), then creates a GitHub release. The `prepublishOnly` hook also runs `pnpm validate`.
+`publish.yml` runs `pnpm run ci` and `npm pack --dry-run`, publishes with npm OIDC trusted publishing and provenance (no npm token), then creates a GitHub release. The `prepublishOnly` hook also runs `pnpm run ci`, so a publish never rewrites files: what ships is what was committed. Run `pnpm validate` first to apply fixes.
+
+Always type `pnpm run ci`. A bare `pnpm ci` is pnpm's own clean install, not this script.

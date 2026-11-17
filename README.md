@@ -63,7 +63,7 @@ pnpm typecheck     # Check TypeScript types
 
 ## Publishing
 
-The template automatically runs `pnpm validate` before publishing via the `prepublishOnly` script.
+The template automatically runs `pnpm run ci` before publishing via the `prepublishOnly` script. It checks format and lint without fixing them, so run `pnpm validate` first if it fails.
 
 ```bash
 npm version patch|minor|major
