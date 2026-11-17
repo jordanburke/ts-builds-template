@@ -8,6 +8,8 @@ publicHoistPattern:
   - "*rimraf*"
   - "*cross-env*"
 
-# Allow our freshly-published toolchain past the global minimumReleaseAge cooldown
+# First-party packages we publish ourselves: the release-age cooldown adds no supply-chain value here.
 minimumReleaseAgeExclude:
-  - ts-builds@3.0.1 || 3.2.2 || 3.4.2
+  - "*functype*"
+  - ts-builds
+  - somamcp
