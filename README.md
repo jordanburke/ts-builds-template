@@ -35,7 +35,10 @@ A modern TypeScript library template with standardized build scripts and tooling
 
 ```bash
 pnpm validate  # Main command: format, lint, test, and build everything
+pnpm run ci    # What CI runs: the same steps, checking format and lint without fixing
 ```
+
+Always type `pnpm run ci`. A bare `pnpm ci` is pnpm's own clean install, not this script.
 
 ### Individual Commands
 

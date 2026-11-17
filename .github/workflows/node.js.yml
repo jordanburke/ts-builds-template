@@ -9,7 +9,7 @@ on:
 # A newer push to a pull request cancels the build it supersedes. A push to main gets a group of its own,
 # because GitHub cancels a waiting run when a newer one joins its group, even with cancel-in-progress off.
 concurrency:
-  group: ci-${{ github.event.pull_request.number || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

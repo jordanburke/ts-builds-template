@@ -107,6 +107,6 @@ npm version patch|minor|major   # bumps package.json, commits, and creates the v
 git push --follow-tags          # the tag triggers .github/workflows/publish.yml
 ```
 
-`publish.yml` runs `pnpm run ci` and `npm pack --dry-run`, publishes with npm OIDC trusted publishing and provenance (no npm token), then creates a GitHub release. The `prepublishOnly` hook also runs `pnpm run ci`, so a publish never rewrites files: what ships is what was committed. Run `pnpm validate` first to apply fixes.
+`publish.yml` runs `pnpm run ci` and `npm pack --dry-run`, publishes with npm OIDC trusted publishing and provenance (no npm token), then creates a GitHub release. The `prepublishOnly` hook also runs `pnpm run ci`, so a publish never rewrites files. A tag-triggered publish ships exactly the tagged commit; a local `npm publish` still ships any uncommitted changes in the tree. Run `pnpm validate` first to apply fixes.
 
 Always type `pnpm run ci`. A bare `pnpm ci` is pnpm's own clean install, not this script.

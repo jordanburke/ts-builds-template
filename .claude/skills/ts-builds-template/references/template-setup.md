@@ -392,7 +392,7 @@ on:
 
 # A newer push to a pull request cancels the build it supersedes; each push to main keeps its own run
 concurrency:
-  group: ci-${{ github.event.pull_request.number || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
